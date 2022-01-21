@@ -292,9 +292,9 @@ if(input_data_source == "CALFIRE"){
 list_dob <- fxns_lfiles("Data/rasterfile/dob_raster",".tif$") 
 list_dup <- list_dob[basename(list_dob) %like% "\\(1\\)"] # 637 obs
 ealier_list <- list_dob[basename(list_dob) %like% "^CA"] # 40 obs
-list_dob <- setdiff(list_dob,c(list_dup,ealier_list)) # 1916 obs
+list_dob <- setdiff(list_dob,c(list_dup,ealier_list)) # 6952 obs
 
-list_ttmean <-list_dob[basename(list_dob) %like% "tt_mean"] # 1014 obs
+list_ttmean <-list_dob[basename(list_dob) %like% "tt_mean"] # 1075 obs
 ttID <- gsub("tt_mean_|_tt_mean|.tif","",basename(list_ttmean))
 ttID <- ifelse(str_detect(ttID,"_"),sapply(strsplit(ttID, "_", fixed = TRUE),function(i) paste(tail(head(i,2),1), collapse = "_")),ttID)
 
@@ -317,7 +317,6 @@ output_de_ca <- "Data/Output_data/daily_emission_CA"
 ##---------------------------------------------------------------
 
 #Create some empty lists/data frames to store information generated in the for loop
-myList <- vector(mode = "list") # a list to show the results from each for loop run (warnings and errors)
 
 total_bs <- data.frame() # a data frame of area burned in different burn severity 
 total_bs_ca <- data.frame() # a data frame of area burned in different burn severity of wildfire events for areas only in California region
@@ -330,7 +329,7 @@ total_pm_day <- data.frame() # an empty data frame for calculating daily emissio
 # Run on all historical wildfires
 # you can try to set i = 1 and jump to start from # (1) to test before running the loop
 for (i in 1:length(list_tif)){
-  r <- tryCatch({
+
     ##---------------------------------------------------------------
     # 1. Burn severity calculation
     ##---------------------------------------------------------------
@@ -571,31 +570,31 @@ for (i in 1:length(list_tif)){
                                                                                                                                                                          ifelse(y==136, fxns_polyL(fxns_para2(136),x),
                                                                                                                                                                                 ifelse(y==139, fxns_polyL(fxns_para2(139),x),
                                                                                                                                                                                        ifelse(y==142, fxns_polyL(fxns_para2(142),x),
-                                                                                                                                                                                              ifelse(y==101, fxB(fxns_para2(101),x),
-                                                                                                                                                                                                     ifelse(y==10321, fxB(fxns_para2(10321),x),
-                                                                                                                                                                                                            ifelse(y==10322, fxB(fxns_para2(10322),x),
-                                                                                                                                                                                                                   ifelse(y==1045, fxB(fxns_para2(1045),x),
-                                                                                                                                                                                                                          ifelse(y==10451, fxB(fxns_para2(10451),x),
-                                                                                                                                                                                                                                 ifelse(y==10452, fxB(fxns_para2(10452),x),
-                                                                                                                                                                                                                                        ifelse(y==1046, fxB(fxns_para2(1046),x),
-                                                                                                                                                                                                                                               ifelse(y==10471, fxB(fxns_para2(10471),x),
-                                                                                                                                                                                                                                                      ifelse(y==10531, fxB(fxns_para2(10531),x),
-                                                                                                                                                                                                                                                             ifelse(y==1054, fxB(fxns_para2(1054),x),
-                                                                                                                                                                                                                                                                    ifelse(y==1055, fxB(fxns_para2(1055),x),
-                                                                                                                                                                                                                                                                           ifelse(y==1056, fxB(fxns_para2(1056),x),
-                                                                                                                                                                                                                                                                                  ifelse(y==1125, fxB(fxns_para2(1125),x),
-                                                                                                                                                                                                                                                                                         ifelse(y==1126, fxB(fxns_para2(1126),x),
-                                                                                                                                                                                                                                                                                                ifelse(y==1166, fxB(fxns_para2(1166),x),
-                                                                                                                                                                                                                                                                                                       ifelse(y==1315, fxB(fxns_para2(1315),x),
-                                                                                                                                                                                                                                                                                                              ifelse(y==1330, fxB(fxns_para2(1330),x),
-                                                                                                                                                                                                                                                                                                                     ifelse(y==1480, fxB(fxns_para2(1480),x),
-                                                                                                                                                                                                                                                                                                                            ifelse(y==132, fxB(fxns_para2(132),x),
-                                                                                                                                                                                                                                                                                                                                   ifelse(y==133, fxB(fxns_para2(133),x),
-                                                                                                                                                                                                                                                                                                                                          ifelse(y==134, fxB(fxns_para2(134),x),
-                                                                                                                                                                                                                                                                                                                                                 ifelse(y==138, fxB(fxns_para2(138),x),
-                                                                                                                                                                                                                                                                                                                                                        ifelse(y==140, fxB(fxns_para2(140),x),
-                                                                                                                                                                                                                                                                                                                                                               ifelse(y==143, fxB(fxns_para2(143),x),
-                                                                                                                                                                                                                                                                                                                                                                      ifelse(y==148, fxB(fxns_para2(148),x),
+                                                                                                                                                                                              ifelse(y==101, fxns_sigB(fxns_para2(101),x),
+                                                                                                                                                                                                     ifelse(y==10321, fxns_sigB(fxns_para2(10321),x),
+                                                                                                                                                                                                            ifelse(y==10322, fxns_sigB(fxns_para2(10322),x),
+                                                                                                                                                                                                                   ifelse(y==1045, fxns_sigB(fxns_para2(1045),x),
+                                                                                                                                                                                                                          ifelse(y==10451, fxns_sigB(fxns_para2(10451),x),
+                                                                                                                                                                                                                                 ifelse(y==10452, fxns_sigB(fxns_para2(10452),x),
+                                                                                                                                                                                                                                        ifelse(y==1046, fxns_sigB(fxns_para2(1046),x),
+                                                                                                                                                                                                                                               ifelse(y==10471, fxns_sigB(fxns_para2(10471),x),
+                                                                                                                                                                                                                                                      ifelse(y==10531, fxns_sigB(fxns_para2(10531),x),
+                                                                                                                                                                                                                                                             ifelse(y==1054, fxns_sigB(fxns_para2(1054),x),
+                                                                                                                                                                                                                                                                    ifelse(y==1055, fxns_sigB(fxns_para2(1055),x),
+                                                                                                                                                                                                                                                                           ifelse(y==1056, fxns_sigB(fxns_para2(1056),x),
+                                                                                                                                                                                                                                                                                  ifelse(y==1125, fxns_sigB(fxns_para2(1125),x),
+                                                                                                                                                                                                                                                                                         ifelse(y==1126, fxns_sigB(fxns_para2(1126),x),
+                                                                                                                                                                                                                                                                                                ifelse(y==1166, fxns_sigB(fxns_para2(1166),x),
+                                                                                                                                                                                                                                                                                                       ifelse(y==1315, fxns_sigB(fxns_para2(1315),x),
+                                                                                                                                                                                                                                                                                                              ifelse(y==1330, fxns_sigB(fxns_para2(1330),x),
+                                                                                                                                                                                                                                                                                                                     ifelse(y==1480, fxns_sigB(fxns_para2(1480),x),
+                                                                                                                                                                                                                                                                                                                            ifelse(y==132, fxns_sigB(fxns_para2(132),x),
+                                                                                                                                                                                                                                                                                                                                   ifelse(y==133, fxns_sigB(fxns_para2(133),x),
+                                                                                                                                                                                                                                                                                                                                          ifelse(y==134, fxns_sigB(fxns_para2(134),x),
+                                                                                                                                                                                                                                                                                                                                                 ifelse(y==138, fxns_sigB(fxns_para2(138),x),
+                                                                                                                                                                                                                                                                                                                                                        ifelse(y==140, fxns_sigB(fxns_para2(140),x),
+                                                                                                                                                                                                                                                                                                                                                               ifelse(y==143, fxns_sigB(fxns_para2(143),x),
+                                                                                                                                                                                                                                                                                                                                                                      ifelse(y==148, fxns_sigB(fxns_para2(148),x),
                                                                                                                                                                                                                                                                                                                                                                              ifelse (y==3, 3.5, #assign CBI value 5  to grass
                                                                                                                                                                                                                                                                                                                                                                                      ifelse (y==1, 0.01, NA) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) )  }) #assign CBI value 0.05 (mean unchanged) to Veg class 1 or NA
   }
@@ -709,8 +708,11 @@ for (i in 1:length(list_tif)){
     ##---------------------------------------------------------------
     # 3. BPS and EVT classification  per pixel comparison for each fire
     ##---------------------------------------------------------------
+    bps_crop_ca <- bps_crop %>% crop(CA) %>% mask(CA)
+    bps_evt_stack = stack(bps_crop_ca,evt_crop)
+    names(bps_evt_stack) <- c("BPS_value","EVT_value")
+    writeRaster(bps_evt_stack,paste0("Data/Output_data/bps_evt_CA/",fireID,"_stack.grd"), format="raster",overwrite =  TRUE)
     
-    bps_evt_stack = stack(bps_crop,evt_crop)
     be_freq<- as.data.frame(extract(bps_evt_stack,c(1:ncell( bps_evt_stack)))) # get the values from each cell
     be_freq <-be_freq[complete.cases(be_freq), ] # remove cells with all NA values in each layer
     colnames(be_freq) <- c("bps","evt")
@@ -724,20 +726,20 @@ for (i in 1:length(list_tif)){
     ##---------------------------------------------------------------
     # 4. Daily PM2.5 Emission Calculation based on Time Tuple Mean data
     ##---------------------------------------------------------------    
-    if(fireYear < 2020 & toupper(fireID) %in% ttID){
-      dob_mean <- raster(list_ttmean[list_ttmean %like% toupper(fireID)] )
-      } else if(fireYear == 2020 & f_fid %in% ttID  ){ 
-            if (f_fid %in% c("247", "300")){
-                 dob_mean <- do.call(merge, lapply(list_ttmean[ttID == f_fid],raster))
-        }else{dob_mean <- raster(list_ttmean[list_ttmean %like% file_name] )}
-      }
+  if(input_data_source =="MTBS") {
+    dobID <- fireID
+  } else{dobID <- f_fid}
     
+  if(toupper(dobID) %in% ttID) {
+    if (fireYear == 2020){
+       if (dobID %in% c("247", "300")){
+          dob_mean <- do.call(merge, lapply(list_ttmean[ttID == f_fid],raster))
+            }else{dob_mean <- raster(list_ttmean[list_ttmean %like% file_name])}
+    } else { dob_mean <- raster(list_ttmean[list_ttmean %like% toupper(fireID)])}
+
     dob_repo <- dob_mean %>%
-      projectRaster(crs=mycrs,method = "ngb")%>%
-      crop(shp) %>%
-      mask(shp) %>% 
-      crop(CA) %>%
-      mask(CA)
+      projectRaster(crs=mycrs,method = "ngb")
+      
     
     dob_floor <- floor(dob_repo)
     #raster to polygon, merge the polygons that on the same date, get the centroids of the date
@@ -753,11 +755,13 @@ for (i in 1:length(list_tif)){
     centroids <- getSpPPolygonsLabptSlots(union_repo)
     
     union_df <- as(union , "SpatialPolygonsDataFrame")
+    
     union_df@data$dummy <- as.numeric(rownames(union_df@data))
+    colnames(union_df@data)[1] = "doy"
       #(1)pm
       pm <- raster::extract(all_stack$PM2.5, union, fun = sum, na.rm = TRUE ) %>% 
         as.data.frame() %>% 
-        mutate(doy = union_df@data$dummy ) 
+        mutate(doy = union_df@data$doy ) 
       
       centroids <- centroids %>%
         as.data.frame() %>%
@@ -767,29 +771,33 @@ for (i in 1:length(list_tif)){
         dplyr::rename(PM = V1) %>%
         mutate(fireID = fireID,dob_ID = i) 
       
+      union_df@data <- union_df@data %>% 
+                       left_join(day_emission[,-6])
+      writeOGR(union_df, output_de_ca, paste0(fireID,"_daily_emission"), 
+                        driver = "ESRI Shapefile",
+               overwrite_layer = T)
       total_pm_day <-bind_rows(total_pm_day,day_emission)
-      
+    }
     
-  }, warning = function(w) {
-    list(warningmessage = w$message)
-  }, error = function(e) {
-    list(errormessage = e$message)
-  })
-  myList[[i]] <- r
-}
+  }
 
-#convert area units from pixel numbers to Acres
-total_bs$unchanged <- fxns_pacre(total_bs$Sev1)
-total_bs$low <- fxns_pacre(total_bs$Sev2)
-total_bs$mod <- fxns_pacre(total_bs$Sev3)
-total_bs$hig <- fxns_pacre(total_bs$Sev4)
-total_bs$grass <- fxns_pacre(total_bs$Sev5)
 
-save(total_bs,file="Data/Rdata/total_bs.rda") #final burn severity data set without using MTBS mask files
+total_bs$unchanged <- fxns_mh(total_bs$Sev1)
+total_bs$low <- fxns_mh(total_bs$Sev2)
+total_bs$mod <- fxns_mh(total_bs$Sev3)
+total_bs$hig <- fxns_mh(total_bs$Sev4)
+total_bs$grass <- fxns_mh(total_bs$Sev5)
 
-total_bs_mask$unchanged <- fxns_pacre(total_bs_mask$Sev1)
-total_bs_mask$low <- fxns_pacre(total_bs_mask$Sev2)
-total_bs_mask$mod <- fxns_pacre(total_bs_mask$Sev3)
-total_bs_mask$hig <- fxns_pacre(total_bs_mask$Sev4)
-total_bs_mask$grass <- fxns_pacre(total_bs_mask$Sev5)
-save(total_bs_mask,file="Data/Rdata/total_bs_mask.rda") #wildfire events with mask files
+save(total_bs,file=paste0("Data/Rdata/total_bs_",input_data_source,str_sub(img_pattern, ,-6),".rda")) #final burn severity data set without using MTBS mask files
+
+total_bs_ca$unchanged <- fxns_mh(total_bs_ca$Sev1)
+total_bs_ca$low <- fxns_mh(total_bs_ca$Sev2)
+total_bs_ca$mod <- fxns_mh(total_bs_ca$Sev3)
+total_bs_ca$hig <- fxns_mh(total_bs_ca$Sev4)
+total_bs_ca$grass <- fxns_mh(total_bs_ca$Sev5)
+save(total_bs_ca,file=paste0("Data/Rdata/total_bs_ca_",input_data_source,str_sub(img_pattern, ,-6),".rda")) #wildfire events with mask files
+
+save(total_em,file=paste0("Data/Rdata/total_em_",input_data_source,str_sub(img_pattern, ,-6),".rda")) #wildfire events with mask files
+save(total_bps_evt,file=paste0("Data/Rdata/total_bps_evt_",input_data_source,str_sub(img_pattern, ,-6),".rda")) #wildfire events with mask files
+save(total_em_class,file=paste0("Data/Rdata/total_em_class_",input_data_source,str_sub(img_pattern, ,-6),".rda")) #wildfire events with mask files
+save(total_pm_day,file=paste0("Data/Rdata/total_pm_day_",input_data_source,str_sub(img_pattern, ,-6),".rda")) #wildfire events with mask files
