@@ -1,2 +1,2 @@
-# CBSE
-California Burn Severity and Emission Inventory for Wildfires
+# WBSE
+Wildfire Burn Severity and Emission Inventory 
