@@ -13,7 +13,7 @@ We implemented WBSE for large wildfires (> 404ha) during 1984-2020 in the state 
 were retrieved from MTBS (https://mtbs.gov/viewer/index.html) via interactive viewer on May 8th, 2021, resulting in a dataset with a total of 1623 wildfires. We also acquired fire 
 perimeters for wildfires (> 404 ha) in 2020 from CAL FIRE (https://frap.fire.ca.gov/frap-projects/fire-perimeters/) and calculated dNBR for each 2020 fire using the dNBR calculation tool with R and Google Earth Engine.
 
-The final output datasets provided here are:
+The following output datasets could also be found here https://doi.org/10.6071/M3QX18:
 
 (1) Burn severity data
 
